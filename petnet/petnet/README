@@ -1,3 +1,42 @@
 dependencies:
 
 libunwind-dev
+
+
+CS 1652 Project 2
+
+Justin Li       jul282@pitt.edu
+Utkarsh Tiwari  utt2@pitt.edu
+
+
+Work Distribution: 
+
+Utkarsh:
+  Steps 3-11 — Initial phase and interactive data flow
+    - Fetched, configured, and built Petnet
+    - Examined udp.c and tcp.c stubs
+    - Extended TCP layer to print arriving packets and socket requests
+    - Investigated packet.h, ipv4.h, tcp.h, and socket.h
+    - Implemented passive open (listen + SYN handling)
+    - Implemented active open (SYN send + SYN-ACK detection)
+    - Implemented basic data transfer (stop-and-wait)
+    - Implemented connection close (FIN handling)
+
+Justin:
+  Steps 12-19 + Extra Credit — TCP connections, socket API, timeouts, and congestion control
+    - Investigated tcp_connection.h and designed connection state struct
+    - Stored all connection state in struct tcp_connection
+    - Implemented tcp_connect_ipv4() with proper connection object creation
+    - Implemented passive open with pet_socket_accepted()
+    - Implemented tcp_close() with full FIN state machine
+      (ESTABLISHED -> FIN_WAIT1 -> FIN_WAIT2, CLOSE_WAIT -> LAST_ACK -> CLOSED)
+    - Implemented data transfer between TCP and socket ring buffer layers
+    - Implemented retransmission timeouts (RTO) with pet_add_timeout()
+    - Extra Credit: Flow control using remote advertised receive window
+    - Extra Credit: Congestion control — slow start, AIMD, and fast retransmit
+
+
+Files Submitted:
+- tcp.c
+- tcp_connection.h
+- README
