@@ -264,7 +264,13 @@ __send_tcp_pkt(struct tcp_connection * con,
 	hdr->flags.SYN  = syn;
 	hdr->flags.ACK  = ack_flag;
 	hdr->flags.FIN  = fin;
-	hdr->recv_win   = htons((uint16_t)pet_socket_recv_capacity(con->sock));
+	//CHANGE BY UTAKRSH AFTER SUBMITTING
+	//BEFORE: 1 LINE 269
+	//hdr->recv_win   = htons((uint16_t)pet_socket_recv_capacity(con->sock));
+	//AFTER: 2 LINES
+	uint16_t win = (uint16_t)pet_socket_recv_capacity(con->sock);
+	hdr->recv_win = htons(win > 0 ? win : 65535);
+
 	hdr->checksum   = 0;
 	hdr->urgent_ptr = 0;
 
